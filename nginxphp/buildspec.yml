@@ -21,7 +21,7 @@ phases:
     commands:
       - echo Entering nginxphp folder.
       - cd nginxphp
-      
+
   build:
     commands:
       - echo Build started on `date`
