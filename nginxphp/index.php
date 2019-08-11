@@ -4,7 +4,9 @@ use Aws\S3\S3Client;
 require 'vendor/autoload.php';
 
 $now = date("Y-m-j, H:i:s");
-echo '<h1>Hullo from webdevops/php-nginx.</h1> <h4>HOSTNAME= '.$_SERVER['HOSTNAME'].'</h4>
+echo '<h1>Hullo from webdevops/php-nginx.</h1>
+<h2>Deployed via CodeDeploy.</h2>
+<h4>HOSTNAME= '.$_SERVER['HOSTNAME'].'</h4>
 <h4>It is '.$now.' now.</h4>';
 
 echo 'REQUEST_URI='.$_SERVER['REQUEST_URI'];
