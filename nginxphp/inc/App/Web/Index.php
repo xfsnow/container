@@ -37,6 +37,7 @@ class App_Web_Index extends App_Web_Web
 	    // $url = 'http://myapplication.tutorial';
         $subdomain = (isset($_GET['namespace']) && ''!= trim($_GET['namespace']) ) ? trim($_GET['namespace']) : 'color-gateway';
         $url = 'http://'.$subdomain.'.local';
+        echo $url;
 	    $content = file_get_contents($url);
 	    echo $content;
 	}
