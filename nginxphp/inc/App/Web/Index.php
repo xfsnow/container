@@ -7,7 +7,7 @@ class App_Web_Index extends App_Web_Web
 	public function indexAction()
 	{
 	    
-		echo __METHOD__;
+		// echo __METHOD__;
 		$now = date("Y-m-j, H:i:s");
         echo '<h1>Hullo from webdevops/php-nginx.</h1> <h4>HOSTNAME= '.$_SERVER['HOSTNAME'].'</h4>
         <h4>It is '.$now.' now.</h4>';
@@ -33,8 +33,9 @@ class App_Web_Index extends App_Web_Web
 	
 	public function gatewayAction()
 	{
-	    echo __METHOD__;
-	    $url = 'http://myapplication.tutorial';
+	    // echo __METHOD__;
+	    // $url = 'http://myapplication.tutorial';
+        $url = 'http://color-red.tutorial';
 	    $content = file_get_contents($url);
 	    echo $content;
 	}
