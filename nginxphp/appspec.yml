@@ -1,0 +1,8 @@
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: "arn:aws:ecs:us-east-1:879888516627:task-definition/nginx_php:6"
+        LoadBalancerInfo:
+          ContainerName: "nginx_php"
+          ContainerPort: 80
