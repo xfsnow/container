@@ -42,11 +42,13 @@ Hot           2021-04-28T09:28:13.010298+00:00  True                      Storag
 
 ## 使用参数文件
 
-再创建一个 [azuredeploy.parameters.json](azuredeploy.parameters.json)。执行 ARM 模板时加参数 --parameters 指定这个参数文件即可。
+再创建一个 [azuredeploy.parameters.json](azuredeploy.parameters.json)。注意 Storage Account 名称要全局唯一，所以你自己创建前最好想个有个性的名字。执行 ARM 模板时加参数 --parameters 指定这个参数文件即可。
 
 ```
 az deployment group create --resource-group armvscode --template-file azuredeploy.json --parameters azuredeploy.parameters.json --debug
 ```
+
+如果执行失败，错误大概率还是Storage Account 名称的格式不合格，或者重名了。调整 azuredeploy.parameters.json 中 名字值再试。执行成功以后，还是显示一下。
 
 ```
 az storage account show -n armvscodeabc -g armvscode --output table
