@@ -42,7 +42,7 @@ Hot           2021-04-28T09:28:13.010298+00:00  True                      Storag
 
 ## 使用参数文件
 
-再创建一个 [azuredeploy.parameters.json] (azuredeploy.parameters.json)。
+再创建一个 [azuredeploy.parameters.json](azuredeploy.parameters.json)。
 
 
 
