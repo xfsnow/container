@@ -1,10 +1,12 @@
 # 部署模板
+## 使用模板中的参数
 ```
-az group create --name arm-vscode --location chinanorth2
+az group create --name armvscode --location chinanorth2
 
-az deployment group create --resource-group arm-vscode --template-file azuredeploy.json --debug
+az deployment group create --resource-group armvscode --template-file azuredeploy.json --debug
 
 ```
+按提示输入 Storage Account 的名字，比如 arm-vscode。
 
 有报错时加 --debug 参数
 ```
@@ -36,4 +38,11 @@ AccessTier    CreationTime                      EnableHttpsTrafficOnly    Kind  
 Hot           2021-04-28T09:28:13.010298+00:00  True                      StorageV2  chinanorth2  armvscode  chinanorth2        Succeeded            arm-vscode       available
 ```
 
-最好把整个资源组删掉。
+最后把整个资源组删掉。
+
+## 使用参数文件
+
+再创建一个 [azuredeploy.parameters.json] (azuredeploy.parameters.json)。
+
+
+
