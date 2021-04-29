@@ -42,7 +42,22 @@ Hot           2021-04-28T09:28:13.010298+00:00  True                      Storag
 
 ## 使用参数文件
 
-再创建一个 [azuredeploy.parameters.json](azuredeploy.parameters.json)。
+再创建一个 [azuredeploy.parameters.json](azuredeploy.parameters.json)。执行 ARM 模板时加参数 --parameters 指定这个参数文件即可。
 
+```
+az deployment group create --resource-group armvscode --template-file azuredeploy.json --parameters azuredeploy.parameters.json --debug
+```
 
+```
+az storage account show -n armvscodeabc -g armvscode --output table
+```
 
+返回
+
+```
+AccessTier    CreationTime                      EnableHttpsTrafficOnly    Kind       Location     Name          PrimaryLocation    ProvisioningState    ResourceGroup  
+  StatusOfPrimary
+------------  --------------------------------  ------------------------  ---------  -----------  ------------  -----------------  -------------------  ---------------  -----------------
+Hot           2021-04-29T01:07:20.290509+00:00  True                      StorageV2  chinanorth2  armvscodeabc  chinanorth2        Succeeded            armvscode      
+  available
+``` 
