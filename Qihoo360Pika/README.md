@@ -12,3 +12,8 @@ https://github.com/Qihoo360/pika/releases/download/v3.3.6/pika-linux-x86_64-v3.3
 ```
 docker build -t yourname/pika -f Qihoo360Pika.Dockerfile .
 ```
+
+构建好后，运行以下命令启动镜像
+```
+docker run -it yourname/pika /bin/bash
+```
