@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloworld-vn
+  namespace: virtualnode
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: helloworld-vn
+  template:
+    metadata:
+      labels:
+        app: helloworld-vn
+    spec:
+      containers:
+      - name: helloworld-vn
+        image: mcr.microsoft.com/azuredocs/aci-helloworld
+        ports:
+        - containerPort: 80
+      nodeSelector:
+        kubernetes.io/role: agent
+        beta.kubernetes.io/os: linux
+        type: virtual-kubelet
+      tolerations:
+      - key: virtual-kubelet.io/provider
+        operator: Exists

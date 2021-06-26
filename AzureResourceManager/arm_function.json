@@ -1,0 +1,34 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "functions": [],
+    "parameters": {
+        // 通过 newGuid() 生成全局唯一ID
+        "guidValue": {
+        "type": "string",
+        // ARM 函数只能放在主模板文件中，不能作为参数文件中的参数。
+        // 并且 newGuid() 函数只能作为参数的默认值，不能直接放在声明变量值的语句中。
+        "defaultValue": "[newGuid()]"
+        }
+    },
+    "variables": {
+        // 再用 uniqueString() 转换成唯一字符串，前面加上sto前缀，最后整体截取前10个字符。
+         "storageName": "[substring(concat('sto', uniqueString(parameters('guidValue'))), 0, 10)]"
+    },
+    "resources": [{
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[variables('storageName')]",
+      "apiVersion": "2019-06-01",
+      "location": "[resourceGroup().location]",
+      "kind": "StorageV2",
+      "sku": {
+            "name": "Premium_LRS",
+            "tier": "Premium"
+        }
+    }],
+    "outputs": {    
+       "storageName": {
+      "type": "string",
+      "value": "[variables('storageName')]"
+    }}
+}

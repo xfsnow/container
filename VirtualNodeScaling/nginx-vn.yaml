@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-vn
+  namespace: virtualnode
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-vn
+  template:
+    metadata:
+      labels:
+        app: nginx-vn
+    spec:
+      containers:
+      - name: nginx-vn
+        image: nginx
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 200m
+            memory: 32Mi
+          limits:
+            cpu: 200m
+            memory: 32Mi
+      tolerations:
+      - key: virtual-kubelet.io/provider
+        value: azure
+        operator: Equal
+        effect: NoSchedule
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: type
+                operator: NotIn
+                values:
+                - virtual-kubelet
