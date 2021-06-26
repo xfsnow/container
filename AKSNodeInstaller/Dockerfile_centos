@@ -1,0 +1,12 @@
+FROM centos
+# 先全部更新一下
+RUN yum -y update
+# 安装 ssh 客户端，只为后续从 kubernetes 的 pod 里连接虚拟机时方便
+RUN yum -y install openssh-clients
+# 把要在宿主机上运行的解决复制到容器的工作目录下
+COPY runOnHost.sh /
+COPY wait.sh /
+# 设置成可执行的权限
+RUN chmod u+x runOnHost.sh
+# 最后执行这个脚本，在宿主机上安装程序
+CMD ["./runOnHost.sh"]
