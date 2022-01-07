@@ -116,6 +116,8 @@ dapr run --app-id pythonapp cmd /c "python app.py"
 
 
 # 在 AKS 上安装 Dapr
+用的是 NodeInstaller 那个 AKS 集群。
+
 ![在Kubernetes上的Dapr示例架构图](img/Architecture_Kubernetes.png "在Kubernetes上的Dapr示例架构图")
 
 https://github.com/dapr/quickstarts/tree/master/hello-kubernetes
@@ -332,3 +334,8 @@ Successfully persisted state.
 再反复访问 http://localhost:8080/order 可看到
 {"orderId":81} 、{"orderId":82} 、{"orderId":83} 等不断刷新的新订单 ID。
 
+最后要停止写入订单数据，需要把 Python pod 删掉。
+```shell
+kubectl delete -f ./deploy/python.yaml
+
+```
