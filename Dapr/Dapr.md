@@ -1,5 +1,6 @@
 # 在 Windows 11 上安装 Dapr
 ## 安装
+![在本地测试环境的 Docker上的Dapr示例架构图](img/Architecture_Docker.png "在本地测试环境的 Docker上的Dapr示例架构图")
 
 https://docs.dapr.io/getting-started/install-dapr-cli/
 
@@ -115,7 +116,7 @@ dapr run --app-id pythonapp cmd /c "python app.py"
 
 
 # 在 AKS 上安装 Dapr
-![在Kubernetes上的Dapr示例架构图](img/Architecture_Kubernetes.png "Title")
+![在Kubernetes上的Dapr示例架构图](img/Architecture_Kubernetes.png "在Kubernetes上的Dapr示例架构图")
 
 https://github.com/dapr/quickstarts/tree/master/hello-kubernetes
 
