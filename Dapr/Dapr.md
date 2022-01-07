@@ -115,7 +115,7 @@ dapr run --app-id pythonapp cmd /c "python app.py"
 
 
 # 在 AKS 上安装 Dapr
-![在Kubernetes上的Dapr示例架构图](/img/Architecture_Kubernetes.png "Title")
+![在Kubernetes上的Dapr示例架构图](img/Architecture_Kubernetes.png "Title")
 
 https://github.com/dapr/quickstarts/tree/master/hello-kubernetes
 
