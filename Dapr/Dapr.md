@@ -213,8 +213,35 @@ To connect to your database from outside the cluster execute the following comma
     kubectl port-forward --namespace default svc/redis-master 6379:6379 &
     REDISCLI_AUTH="$REDIS_PASSWORD" redis-cli -h 127.0.0.1 -p 6379
 ```
-记下这里的 redis-master.default.svc.cluster.local 作为 Redis 主节点的 DNS 名。后面用到。
-用这个 DNS 名称，填写到创建的 %USERPROFILE%/.dapr/components/redis-state.yaml 配置文件中。例如：
+记下这里的 redis-master.default.svc.cluster.local 作为 Redis 主节点的 DNS 名，后面用到。
+
+通过 helm 安装的 Redis 集群同时还在 AKS 集群中创建了 secret 用来保存 Redis 集群的访问密码。
+```shell
+kubectl get secrets
+NAME                          TYPE                                  DATA   AGE
+default-token-bvbgk           kubernetes.io/service-account-token   3      285d
+redis                         Opaque                                1      2m
+redis-token-x67qj             kubernetes.io/service-account-token   3      2m
+sh.helm.release.v1.redis.v1   helm.sh/release.v1                    1      2m
+
+kubectl describe secret redis
+Name:         redis
+Namespace:    default
+Labels:       app.kubernetes.io/instance=redis
+              app.kubernetes.io/managed-by=Helm
+              app.kubernetes.io/name=redis
+              helm.sh/chart=redis-15.7.1
+Annotations:  meta.helm.sh/release-name: redis
+              meta.helm.sh/release-namespace: default
+
+Type:  Opaque
+
+Data
+====
+redis-password:  10 bytes
+```
+这名为 redis 的 secret 里面的数据键名是 redis-password，后面也会用于 Dapr 的配置文件。
+用前面 Redis 集群的 DNS 名称，填写到创建的 %USERPROFILE%/.dapr/components/redis-state.yaml 配置文件中。例如：
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
@@ -230,7 +257,7 @@ spec:
   - name: redisPassword
     secretKeyRef:
       name: redis
-      key: naCRGuROQ0
+      key: redis-password
   # uncomment below for connecting to redis cache instances over TLS (ex - Azure Redis Cache)
   # - name: enableTLS
   #   value: true
@@ -243,6 +270,7 @@ NAME        TYPE         VERSION  SCOPES  CREATED              AGE
 statestore  state.redis  v1               2022-01-07 15:56.18  1h
 
 ```
+
 
 
 ```shell
