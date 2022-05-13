@@ -39,4 +39,3 @@ source ~/.bashrc
 ./mconfig --prefix=$SINGULARITYPATH && \
 make -C ./builddir && \
 make -C ./builddir install
-
