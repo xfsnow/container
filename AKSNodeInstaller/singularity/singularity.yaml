@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: singularity
+  labels:
+    app: singularity
+spec:
+  containers:
+    - name: singularity
+      image: nodeinstaller.azurecr.cn/singularity:0.2

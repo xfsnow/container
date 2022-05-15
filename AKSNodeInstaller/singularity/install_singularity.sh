@@ -15,8 +15,8 @@ git \
 cryptsetup-bin
 
 # Download and install Golang
-export VERSION=1.18.1 OS=linux ARCH=amd64 && \
-wget -q https://dl.google.com/go/go$VERSION.$OS-$ARCH.tar.gz && \
+export VERSION=1.18.2 OS=linux ARCH=amd64 && \
+wget -t 0 -T 15 -c https://dl.google.com/go/go$VERSION.$OS-$ARCH.tar.gz \
 sudo tar -C /usr/local -xzf go$VERSION.$OS-$ARCH.tar.gz && \
 rm go$VERSION.$OS-$ARCH.tar.gz
 
@@ -32,8 +32,9 @@ go version
 export VERSION=3.9.9 && # adjust this as necessary \
 mkdir -p $HOME/src/github.com/sylabs && \
 cd $HOME/src/github.com/sylabs && \
-wget -q https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-ce-${VERSION}.tar.gz && \
+wget -t 0 -T 15 -c https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-ce-${VERSION}.tar.gz && \
 tar -xzf singularity-ce-${VERSION}.tar.gz && \
+rm singularity-ce-${VERSION}.tar.gz  && \
 cd ./singularity-ce-${VERSION}
 
 echo 'export SINGULARITYPATH=/opt/singularity' >> ~/.bashrc && \
@@ -44,3 +45,6 @@ source ~/.bashrc
 ./mconfig --prefix=$SINGULARITYPATH && \
 make -C ./builddir && \
 make -C ./builddir install
+
+# Sleep so that the Pod in the DaemonSet does not exit
+sleep infinity
